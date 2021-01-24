@@ -1,0 +1,14 @@
+import socket
+# create server socket
+v2v_sever = socket.socket()
+print("socket created !!")
+v2v_sever.bind(("localhost", 9999))
+v2v_sever.listen(3)
+print("waiting for Connection !!! ")
+while True:
+    vehicle, v_addr = v2v_sever.accept()
+    vehicle_message = vehicle.recv(1024).decode()
+    print("connected with..", v_addr)
+    message = input("enter message")
+    v2v_sever.send(bytes(message,'UTF-8'))
+    v2v_sever.close()
