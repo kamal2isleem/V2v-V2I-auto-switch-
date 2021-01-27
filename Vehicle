@@ -1,11 +1,13 @@
 import socket
 vehicle = socket.socket()
 print("connecting to server!!!")
-vehicle.connect(("192.168.1.10", 9999))
+# connecting to V2V server 
+vehicle.connect(("V2V-server-ip-address", 9999))
 server_message = vehicle.recv(1024).decode()
+# if the message from the server is error it will connect to V2I server 
 if server_message == "error":
-    vehicle.connect(("192.168.1.20", 8888))
+    vehicle.connect(("V2I-server-ip-address", 8888))
 else :
     print(vehicle.recv(1024))
-vehicle_message = ["ok","error"]
+# vehicle_message = ["ok","error"]
 vehicle.send(bytes(vehicle_message, 'uft-8'))
