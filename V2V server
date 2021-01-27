@@ -2,7 +2,9 @@ import socket
 # create server socket
 v2v_sever = socket.socket()
 print("socket created !!")
-v2v_sever.bind(("localhost", 9999))
+# add your v2v server's ip address
+v2v_sever.bind(("V2V-server-ip-address", 9999))
+# number of connections 
 v2v_sever.listen(3)
 print("waiting for Connection !!! ")
 while True:
@@ -10,5 +12,6 @@ while True:
     vehicle_message = vehicle.recv(1024).decode()
     print("connected with..", v_addr)
     message = input("enter message")
+ # sending messages for the vehicle 
     v2v_sever.send(bytes(message,'UTF-8'))
     v2v_sever.close()
